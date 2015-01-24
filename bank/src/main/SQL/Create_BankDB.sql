@@ -2,7 +2,7 @@
 /* DBMS name:      MySQL 5.0                                    */
 /* Created on:     24.01.2015 11:27:39                          */
 /*==============================================================*/
-/* vor ersten Ausführung in MySQL: create database bank;*/
+/* vor ersten Ausführung in MySQL:  create database bank;*/
 
 drop table if exists ACCOUNT;
 
