@@ -11,7 +11,7 @@ public class StocksPortfolioEntityPK implements Serializable {
     private int accountId;
     private int stockId;
 
-    @Column(name = "ACCOUNT_ID")
+    @Column(name = "ACCOUNT_ID", nullable = false, insertable = true, updatable = true)
     @Id
     public int getAccountId() {
         return accountId;
@@ -21,7 +21,7 @@ public class StocksPortfolioEntityPK implements Serializable {
         this.accountId = accountId;
     }
 
-    @Column(name = "STOCK_ID")
+    @Column(name = "STOCK_ID", nullable = false, insertable = true, updatable = true)
     @Id
     public int getStockId() {
         return stockId;

@@ -13,7 +13,7 @@ public class ContraAccountEntity {
     private String contraBic;
 
     @Id
-    @Column(name = "TRANSACTIONS_ID")
+    @Column(name = "TRANSACTIONS_ID", nullable = false, insertable = true, updatable = true)
     public int getTransactionsId() {
         return transactionsId;
     }
@@ -23,7 +23,7 @@ public class ContraAccountEntity {
     }
 
     @Basic
-    @Column(name = "CONTRA_IBAN")
+    @Column(name = "CONTRA_IBAN", nullable = false, insertable = true, updatable = true, length = 34)
     public String getContraIban() {
         return contraIban;
     }
@@ -33,7 +33,7 @@ public class ContraAccountEntity {
     }
 
     @Basic
-    @Column(name = "CONTRA_BIC")
+    @Column(name = "CONTRA_BIC", nullable = false, insertable = true, updatable = true, length = 11)
     public String getContraBic() {
         return contraBic;
     }

@@ -14,7 +14,7 @@ public class BankEntity {
     private String bankName;
 
     @Basic
-    @Column(name = "BANK_BIC")
+    @Column(name = "BANK_BIC", nullable = false, insertable = true, updatable = true, length = 11)
     public String getBankBic() {
         return bankBic;
     }
@@ -24,7 +24,7 @@ public class BankEntity {
     }
 
     @Basic
-    @Column(name = "BANK_ADDRESS")
+    @Column(name = "BANK_ADDRESS", nullable = false, insertable = true, updatable = true, length = 128)
     public String getBankAddress() {
         return bankAddress;
     }
@@ -34,7 +34,8 @@ public class BankEntity {
     }
 
     @Id
-    @Column(name = "BANK_ID")
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name = "BANK_ID", nullable = false, insertable = true, updatable = true)
     public int getBankId() {
         return bankId;
     }
@@ -44,7 +45,7 @@ public class BankEntity {
     }
 
     @Basic
-    @Column(name = "BANK_NAME")
+    @Column(name = "BANK_NAME", nullable = false, insertable = true, updatable = true, length = 50)
     public String getBankName() {
         return bankName;
     }
@@ -75,5 +76,20 @@ public class BankEntity {
         result = 31 * result + bankId;
         result = 31 * result + (bankName != null ? bankName.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString(){
+        StringBuilder result = new StringBuilder();
+        String nl = System.getProperty("line.separator");
+
+        result.append(this.getClass().getName() + " Object {" + nl);
+        result.append("  bankId: " + bankId + nl);
+        result.append("  bankName: " + bankName + nl);
+        result.append("  bankBic: " + bankBic + nl);
+        result.append("  bankAddress: " + bankAddress + nl);
+        result.append("}" + nl);
+
+        return result.toString();
     }
 }

@@ -21,7 +21,7 @@ public class TransactionEntity {
     private Integer cusTransactionsId;
 
     @Basic
-    @Column(name = "TRANSACTION_AMOUNT")
+    @Column(name = "TRANSACTION_AMOUNT", nullable = false, insertable = true, updatable = true, precision = 2)
     public BigDecimal getTransactionAmount() {
         return transactionAmount;
     }
@@ -31,7 +31,7 @@ public class TransactionEntity {
     }
 
     @Basic
-    @Column(name = "VALUTA_DATE")
+    @Column(name = "VALUTA_DATE", nullable = false, insertable = true, updatable = true)
     public Date getValutaDate() {
         return valutaDate;
     }
@@ -41,7 +41,7 @@ public class TransactionEntity {
     }
 
     @Basic
-    @Column(name = "TRANSACTION_TYPE")
+    @Column(name = "TRANSACTION_TYPE", nullable = false, insertable = true, updatable = true)
     public int getTransactionType() {
         return transactionType;
     }
@@ -51,7 +51,7 @@ public class TransactionEntity {
     }
 
     @Basic
-    @Column(name = "TIMESTAMP")
+    @Column(name = "TIMESTAMP", nullable = false, insertable = true, updatable = true)
     public Timestamp getTimestamp() {
         return timestamp;
     }
@@ -61,7 +61,7 @@ public class TransactionEntity {
     }
 
     @Id
-    @Column(name = "TRANSACTIONS_ID")
+    @Column(name = "TRANSACTIONS_ID", nullable = false, insertable = true, updatable = true)
     public int getTransactionsId() {
         return transactionsId;
     }
@@ -71,7 +71,7 @@ public class TransactionEntity {
     }
 
     @Basic
-    @Column(name = "ACCOUNT_ID")
+    @Column(name = "ACCOUNT_ID", nullable = false, insertable = true, updatable = true)
     public int getAccountId() {
         return accountId;
     }
@@ -81,7 +81,7 @@ public class TransactionEntity {
     }
 
     @Basic
-    @Column(name = "CON_TRANSACTIONS_ID")
+    @Column(name = "CON_TRANSACTIONS_ID", nullable = true, insertable = true, updatable = true)
     public Integer getConTransactionsId() {
         return conTransactionsId;
     }
@@ -91,7 +91,7 @@ public class TransactionEntity {
     }
 
     @Basic
-    @Column(name = "CUS_TRANSACTIONS_ID")
+    @Column(name = "CUS_TRANSACTIONS_ID", nullable = true, insertable = true, updatable = true)
     public Integer getCusTransactionsId() {
         return cusTransactionsId;
     }

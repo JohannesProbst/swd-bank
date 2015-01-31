@@ -1,7 +1,9 @@
 package at.ac.fhsalzburg.swd.controller;
 
+import at.ac.fhsalzburg.swd.entities.BankEntity;
 import at.ac.fhsalzburg.swd.entities.CustomerEntity;
 import at.ac.fhsalzburg.swd.exceptions.CustomerNotFound;
+import at.ac.fhsalzburg.swd.services.BankService;
 import at.ac.fhsalzburg.swd.services.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,9 +25,15 @@ public class CustomerController {
     @Autowired
     private CustomerService customerService;
 
+    @Autowired
+    private BankService bankService;
+
     @RequestMapping(value = "/create", method = RequestMethod.GET)
     public ModelAndView newCustomerPage(){
         ModelAndView mav = new ModelAndView("customer-new","customer", new CustomerEntity());
+        List<BankEntity> bankList = bankService.findAll();
+        mav.addObject("bankList", bankList);
+
         return mav;
     }
 
@@ -61,7 +69,8 @@ public class CustomerController {
     public ModelAndView editCustomer(@ModelAttribute CustomerEntity customer, @PathVariable Integer id, final RedirectAttributes redirectAttributes) throws CustomerNotFound{
         ModelAndView mav = new ModelAndView("redirect:/index");
         String message = "Customer was successfully updated.";
-
+        System.out.printf(customer.toString());
+        customer.setCustomerId(id);//Weil die id in der jsp seite nicht per input gesetzt wird, kommt sie auf null gesetzt zurück. Daher muss ich sie wieder korrigieren!
         customerService.update(customer);
 
         redirectAttributes.addFlashAttribute("message", message);

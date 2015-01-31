@@ -1,4 +1,5 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%--
   Created by IntelliJ IDEA.
   User: Joey
@@ -30,7 +31,12 @@
     </tr>
     <tr>
       <td>BankId:</td>
-      <td><form:input path="bankId" /></td>
+
+      <td>
+
+          <form:select path="bankId" items="${bankList}" itemValue="bankId" itemLabel="bankName" name="select"/>
+
+      </td>
     </tr>
     <tr>
       <td><input type="submit" value="create" /></td>

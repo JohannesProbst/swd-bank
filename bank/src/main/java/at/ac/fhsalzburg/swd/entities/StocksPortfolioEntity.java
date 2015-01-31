@@ -15,7 +15,7 @@ public class StocksPortfolioEntity {
     private String stockname;
 
     @Id
-    @Column(name = "ACCOUNT_ID")
+    @Column(name = "ACCOUNT_ID", nullable = false, insertable = true, updatable = true)
     public int getAccountId() {
         return accountId;
     }
@@ -25,7 +25,7 @@ public class StocksPortfolioEntity {
     }
 
     @Id
-    @Column(name = "STOCK_ID")
+    @Column(name = "STOCK_ID", nullable = false, insertable = true, updatable = true)
     public int getStockId() {
         return stockId;
     }
@@ -35,7 +35,7 @@ public class StocksPortfolioEntity {
     }
 
     @Basic
-    @Column(name = "STOCK_AMOUNT")
+    @Column(name = "STOCK_AMOUNT", nullable = false, insertable = true, updatable = true)
     public int getStockAmount() {
         return stockAmount;
     }
@@ -45,7 +45,7 @@ public class StocksPortfolioEntity {
     }
 
     @Basic
-    @Column(name = "STOCKNAME")
+    @Column(name = "STOCKNAME", nullable = false, insertable = true, updatable = true, length = 128)
     public String getStockname() {
         return stockname;
     }

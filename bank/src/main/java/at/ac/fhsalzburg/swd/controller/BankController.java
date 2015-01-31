@@ -53,6 +53,7 @@ public class BankController {
     public ModelAndView editBankPage(@PathVariable Integer id){
         ModelAndView mav = new ModelAndView("bank-edit");
         BankEntity bank = bankService.findById(id);
+        System.out.printf(bank.toString());
         mav.addObject("bank", bank);
         return mav;
     }
@@ -61,7 +62,8 @@ public class BankController {
     public ModelAndView editBank(@ModelAttribute BankEntity bank, @PathVariable Integer id, final RedirectAttributes redirectAttributes) throws BankNotFound{
         ModelAndView mav = new ModelAndView("redirect:/index");
         String message = "Bank was successfully updated.";
-
+        System.out.printf(bank.toString());
+        bank.setBankId(id);//Weil die id in der jsp seite nicht per input gesetzt wird, kommt sie auf null gesetzt zurück. Daher muss ich sie wieder korrigieren!
         bankService.update(bank);
 
         redirectAttributes.addFlashAttribute("message", message);

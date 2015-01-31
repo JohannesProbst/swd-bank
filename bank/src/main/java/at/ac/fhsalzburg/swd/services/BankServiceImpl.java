@@ -26,7 +26,7 @@ public class BankServiceImpl implements BankService {
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = BankNotFound.class)
     public BankEntity delete(int id) throws BankNotFound {
         BankEntity deletedBank = bankRepository.findOne(id);
         if(deletedBank == null)
@@ -42,9 +42,10 @@ public class BankServiceImpl implements BankService {
     }
 
     @Override
-    @Transactional
+    @Transactional(rollbackFor = BankNotFound.class)
     public BankEntity update(BankEntity bank) throws BankNotFound {
         BankEntity updatedBank = bankRepository.findOne(bank.getBankId());
+        System.out.printf(bank.toString());
         if (updatedBank == null)
             throw new BankNotFound();
         updatedBank.setBankName(bank.getBankName());

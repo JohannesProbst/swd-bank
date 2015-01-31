@@ -15,7 +15,7 @@ public class CustomerEntity {
     private String pin;
 
     @Basic
-    @Column(name = "CUSTOMER_ADDRESS")
+    @Column(name = "CUSTOMER_ADDRESS", nullable = false, insertable = true, updatable = true, length = 128)
     public String getCustomerAddress() {
         return customerAddress;
     }
@@ -25,7 +25,7 @@ public class CustomerEntity {
     }
 
     @Basic
-    @Column(name = "CUSTOMER_NAME")
+    @Column(name = "CUSTOMER_NAME", nullable = false, insertable = true, updatable = true, length = 128)
     public String getCustomerName() {
         return customerName;
     }
@@ -35,7 +35,7 @@ public class CustomerEntity {
     }
 
     @Id
-    @Column(name = "CUSTOMER_ID")
+    @Column(name = "CUSTOMER_ID", nullable = false, insertable = true, updatable = true)
     public int getCustomerId() {
         return customerId;
     }
@@ -45,7 +45,7 @@ public class CustomerEntity {
     }
 
     @Basic
-    @Column(name = "BANK_ID")
+    @Column(name = "BANK_ID", nullable = false, insertable = true, updatable = true)
     public int getBankId() {
         return bankId;
     }
@@ -55,7 +55,7 @@ public class CustomerEntity {
     }
 
     @Basic
-    @Column(name = "PIN")
+    @Column(name = "PIN", nullable = false, insertable = true, updatable = true, length = 128)
     public String getPin() {
         return pin;
     }
@@ -89,5 +89,21 @@ public class CustomerEntity {
         result = 31 * result + bankId;
         result = 31 * result + (pin != null ? pin.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString(){
+        StringBuilder result = new StringBuilder();
+        String nl = System.getProperty("line.separator");
+
+        result.append(this.getClass().getName() + " Object {" + nl);
+        result.append("  customerName: " + customerName + nl);
+        result.append("  customerId: " + customerId + nl);
+        result.append("  pin: " + pin + nl);
+        result.append("  customerAddress: " + customerAddress + nl);
+        result.append("  bankId: " + bankId + nl);
+        result.append("}" + nl);
+
+        return result.toString();
     }
 }

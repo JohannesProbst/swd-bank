@@ -12,7 +12,7 @@ public class SavingsAccountEntity {
     private int cheAccountId;
 
     @Id
-    @Column(name = "ACCOUNT_ID")
+    @Column(name = "ACCOUNT_ID", nullable = false, insertable = true, updatable = true)
     public int getAccountId() {
         return accountId;
     }
@@ -22,7 +22,7 @@ public class SavingsAccountEntity {
     }
 
     @Basic
-    @Column(name = "CHE_ACCOUNT_ID")
+    @Column(name = "CHE_ACCOUNT_ID", nullable = false, insertable = true, updatable = true)
     public int getCheAccountId() {
         return cheAccountId;
     }

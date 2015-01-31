@@ -46,7 +46,7 @@ create table BANK
 (
    BANK_BIC             varchar(11) not null,
    BANK_ADDRESS         varchar(128) not null,
-   BANK_ID              int not null,
+   BANK_ID              int not null AUTO_INCREMENT,
    BANK_NAME            varchar(50) not null,
    primary key (BANK_ID)
 );
@@ -101,7 +101,7 @@ create table CUSTOMER
 (
    CUSTOMER_ADDRESS     varchar(128) not null,
    CUSTOMER_NAME        varchar(128) not null,
-   CUSTOMER_ID          int not null,
+   CUSTOMER_ID          int not null AUTO_INCREMENT,
    BANK_ID              int not null,
    PIN                  varchar(128) not null,
    primary key (CUSTOMER_ID)

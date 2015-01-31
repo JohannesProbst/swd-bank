@@ -15,7 +15,7 @@ public class CustodyTransactionEntity {
     private String stockName;
 
     @Id
-    @Column(name = "TRANSACTIONS_ID")
+    @Column(name = "TRANSACTIONS_ID", nullable = false, insertable = true, updatable = true)
     public int getTransactionsId() {
         return transactionsId;
     }
@@ -25,7 +25,7 @@ public class CustodyTransactionEntity {
     }
 
     @Basic
-    @Column(name = "STOCK_QUANTITY")
+    @Column(name = "STOCK_QUANTITY", nullable = false, insertable = true, updatable = true)
     public int getStockQuantity() {
         return stockQuantity;
     }
@@ -35,7 +35,7 @@ public class CustodyTransactionEntity {
     }
 
     @Basic
-    @Column(name = "STOCK_EXCHANGE_RATE")
+    @Column(name = "STOCK_EXCHANGE_RATE", nullable = false, insertable = true, updatable = true, precision = 5)
     public BigDecimal getStockExchangeRate() {
         return stockExchangeRate;
     }
@@ -45,7 +45,7 @@ public class CustodyTransactionEntity {
     }
 
     @Basic
-    @Column(name = "STOCK_NAME")
+    @Column(name = "STOCK_NAME", nullable = false, insertable = true, updatable = true, length = 128)
     public String getStockName() {
         return stockName;
     }

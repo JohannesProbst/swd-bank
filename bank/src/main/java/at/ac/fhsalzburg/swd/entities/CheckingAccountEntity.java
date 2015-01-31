@@ -12,7 +12,7 @@ public class CheckingAccountEntity {
     private Integer cusAccountId;
 
     @Id
-    @Column(name = "ACCOUNT_ID")
+    @Column(name = "ACCOUNT_ID", nullable = false, insertable = true, updatable = true)
     public int getAccountId() {
         return accountId;
     }
@@ -22,7 +22,7 @@ public class CheckingAccountEntity {
     }
 
     @Basic
-    @Column(name = "CUS_ACCOUNT_ID")
+    @Column(name = "CUS_ACCOUNT_ID", nullable = true, insertable = true, updatable = true)
     public Integer getCusAccountId() {
         return cusAccountId;
     }

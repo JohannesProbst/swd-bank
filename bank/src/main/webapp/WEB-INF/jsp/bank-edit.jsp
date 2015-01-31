@@ -26,11 +26,11 @@
             <td><form:input path="bankAddress"/></td>
         </tr>
         <tr>
-            <td><input type="submit" value="create" /></td>
-        </tr>
-        <tr>
             <td>BIC:</td>
             <td><form:input path="bankBic"/></td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="update" /></td>
         </tr>
         </tbody>
     </table>

@@ -19,7 +19,7 @@ public class AccountEntity {
     private Timestamp accountStatementDate;
 
     @Basic
-    @Column(name = "ACCOUNT_DESCRIPTION")
+    @Column(name = "ACCOUNT_DESCRIPTION", nullable = false, insertable = true, updatable = true, length = 128)
     public String getAccountDescription() {
         return accountDescription;
     }
@@ -29,7 +29,7 @@ public class AccountEntity {
     }
 
     @Id
-    @Column(name = "ACCOUNT_ID")
+    @Column(name = "ACCOUNT_ID", nullable = false, insertable = true, updatable = true)
     public int getAccountId() {
         return accountId;
     }
@@ -39,7 +39,7 @@ public class AccountEntity {
     }
 
     @Basic
-    @Column(name = "CUSTOMER_ID")
+    @Column(name = "CUSTOMER_ID", nullable = false, insertable = true, updatable = true)
     public int getCustomerId() {
         return customerId;
     }
@@ -49,7 +49,7 @@ public class AccountEntity {
     }
 
     @Basic
-    @Column(name = "ACCOUNT_IBAN")
+    @Column(name = "ACCOUNT_IBAN", nullable = false, insertable = true, updatable = true, length = 34)
     public String getAccountIban() {
         return accountIban;
     }
@@ -59,7 +59,7 @@ public class AccountEntity {
     }
 
     @Basic
-    @Column(name = "ACCOUNT_SALDO")
+    @Column(name = "ACCOUNT_SALDO", nullable = false, insertable = true, updatable = true, precision = 2)
     public BigDecimal getAccountSaldo() {
         return accountSaldo;
     }
@@ -69,7 +69,7 @@ public class AccountEntity {
     }
 
     @Basic
-    @Column(name = "ACCOUNT_STATEMENT")
+    @Column(name = "ACCOUNT_STATEMENT", nullable = true, insertable = true, updatable = true, precision = 2)
     public BigDecimal getAccountStatement() {
         return accountStatement;
     }
@@ -79,7 +79,7 @@ public class AccountEntity {
     }
 
     @Basic
-    @Column(name = "ACCOUNT_STATEMENT_DATE")
+    @Column(name = "ACCOUNT_STATEMENT_DATE", nullable = false, insertable = true, updatable = true)
     public Timestamp getAccountStatementDate() {
         return accountStatementDate;
     }
