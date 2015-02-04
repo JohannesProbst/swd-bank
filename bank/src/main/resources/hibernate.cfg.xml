@@ -10,16 +10,15 @@
         <property name="hibernate.format_sql">true</property>
         <property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>
         <property name="hibernate.current_session_context_class">thread</property>
-        <mapping class="at.ac.fhsalzburg.swd.entities.AccountEntity"/>
         <mapping class="at.ac.fhsalzburg.swd.entities.BankEntity"/>
-        <mapping class="at.ac.fhsalzburg.swd.entities.CheckingAccountEntity"/>
         <mapping class="at.ac.fhsalzburg.swd.entities.ContraAccountEntity"/>
-        <mapping class="at.ac.fhsalzburg.swd.entities.CustodyAccountEntity"/>
         <mapping class="at.ac.fhsalzburg.swd.entities.CustodyTransactionEntity"/>
         <mapping class="at.ac.fhsalzburg.swd.entities.CustomerEntity"/>
-        <mapping class="at.ac.fhsalzburg.swd.entities.SavingsAccountEntity"/>
         <mapping class="at.ac.fhsalzburg.swd.entities.StocksPortfolioEntity"/>
         <mapping class="at.ac.fhsalzburg.swd.entities.TransactionEntity"/>
+        <mapping class="at.ac.fhsalzburg.swd.entities.CheckingAccountEntity"/>
+        <mapping class="at.ac.fhsalzburg.swd.entities.SavingsAccountEntity"/>
+        <mapping class="at.ac.fhsalzburg.swd.entities.CustodyAccountEntity"/>
         <!--<mapping class="at.ac.fhsalzburg.swd.entities"/>-->
     </session-factory>
 </hibernate-configuration>

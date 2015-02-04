@@ -15,7 +15,8 @@
 <h1>Kunden bearbeiten</h1>
 <jsp:useBean id="customer" scope="request" type="at.ac.fhsalzburg.swd.entities.CustomerEntity"/>
 <form:form method="post" commandName="customer" action="${pageContext.request.contextPath}/customer/edit/${customer.customerId}">
-  <table>
+    <div><form:hidden path="customerId" /></div>
+    <table>
     <tbody>
     <tr>
       <td>Name:</td>
@@ -34,7 +35,7 @@
       <td><form:input path="bankId"/></td>
     </tr>
     <tr>
-      <td><input type="submit" value="create" /></td>
+      <td><input type="submit" value="update" /></td>
     </tr>
     </tbody>
   </table>

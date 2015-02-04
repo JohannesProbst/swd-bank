@@ -1,18 +1,24 @@
 package at.ac.fhsalzburg.swd.entities;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
+import java.sql.Timestamp;
 
 /**
- * Created by Joey on 24.01.2015.
+ * Created by WuM on 03.02.2015.
  */
 @Entity
 @Table(name = "checking_account", schema = "", catalog = "bank")
 public class CheckingAccountEntity {
     private int accountId;
-    private Integer cusAccountId;
+    private String accountDescription;
+    private String accountIban;
+    private BigDecimal accountSaldo;
+    private BigDecimal accountStatement;
+    private Timestamp accountStatementDate;
 
     @Id
-    @Column(name = "ACCOUNT_ID", nullable = false, insertable = true, updatable = true)
+    @Column(name = "ACCOUNT_ID")
     public int getAccountId() {
         return accountId;
     }
@@ -22,13 +28,53 @@ public class CheckingAccountEntity {
     }
 
     @Basic
-    @Column(name = "CUS_ACCOUNT_ID", nullable = true, insertable = true, updatable = true)
-    public Integer getCusAccountId() {
-        return cusAccountId;
+    @Column(name = "ACCOUNT_DESCRIPTION")
+    public String getAccountDescription() {
+        return accountDescription;
     }
 
-    public void setCusAccountId(Integer cusAccountId) {
-        this.cusAccountId = cusAccountId;
+    public void setAccountDescription(String accountDescription) {
+        this.accountDescription = accountDescription;
+    }
+
+    @Basic
+    @Column(name = "ACCOUNT_IBAN")
+    public String getAccountIban() {
+        return accountIban;
+    }
+
+    public void setAccountIban(String accountIban) {
+        this.accountIban = accountIban;
+    }
+
+    @Basic
+    @Column(name = "ACCOUNT_SALDO")
+    public BigDecimal getAccountSaldo() {
+        return accountSaldo;
+    }
+
+    public void setAccountSaldo(BigDecimal accountSaldo) {
+        this.accountSaldo = accountSaldo;
+    }
+
+    @Basic
+    @Column(name = "ACCOUNT_STATEMENT")
+    public BigDecimal getAccountStatement() {
+        return accountStatement;
+    }
+
+    public void setAccountStatement(BigDecimal accountStatement) {
+        this.accountStatement = accountStatement;
+    }
+
+    @Basic
+    @Column(name = "ACCOUNT_STATEMENT_DATE")
+    public Timestamp getAccountStatementDate() {
+        return accountStatementDate;
+    }
+
+    public void setAccountStatementDate(Timestamp accountStatementDate) {
+        this.accountStatementDate = accountStatementDate;
     }
 
     @Override
@@ -39,7 +85,14 @@ public class CheckingAccountEntity {
         CheckingAccountEntity that = (CheckingAccountEntity) o;
 
         if (accountId != that.accountId) return false;
-        if (cusAccountId != null ? !cusAccountId.equals(that.cusAccountId) : that.cusAccountId != null) return false;
+        if (accountDescription != null ? !accountDescription.equals(that.accountDescription) : that.accountDescription != null)
+            return false;
+        if (accountIban != null ? !accountIban.equals(that.accountIban) : that.accountIban != null) return false;
+        if (accountSaldo != null ? !accountSaldo.equals(that.accountSaldo) : that.accountSaldo != null) return false;
+        if (accountStatement != null ? !accountStatement.equals(that.accountStatement) : that.accountStatement != null)
+            return false;
+        if (accountStatementDate != null ? !accountStatementDate.equals(that.accountStatementDate) : that.accountStatementDate != null)
+            return false;
 
         return true;
     }
@@ -47,7 +100,11 @@ public class CheckingAccountEntity {
     @Override
     public int hashCode() {
         int result = accountId;
-        result = 31 * result + (cusAccountId != null ? cusAccountId.hashCode() : 0);
+        result = 31 * result + (accountDescription != null ? accountDescription.hashCode() : 0);
+        result = 31 * result + (accountIban != null ? accountIban.hashCode() : 0);
+        result = 31 * result + (accountSaldo != null ? accountSaldo.hashCode() : 0);
+        result = 31 * result + (accountStatement != null ? accountStatement.hashCode() : 0);
+        result = 31 * result + (accountStatementDate != null ? accountStatementDate.hashCode() : 0);
         return result;
     }
 }

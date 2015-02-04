@@ -15,6 +15,7 @@
 <h1>Bank bearbeiten</h1>
 <jsp:useBean id="bank" scope="request" type="at.ac.fhsalzburg.swd.entities.BankEntity"/>
 <form:form method="post" commandName="bank" action="${pageContext.request.contextPath}/bank/edit/${bank.bankId}">
+    <div><form:hidden path="bankId" /></div>
     <table>
         <tbody>
         <tr>

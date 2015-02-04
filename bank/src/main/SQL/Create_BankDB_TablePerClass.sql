@@ -1,10 +1,8 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     24.01.2015 11:27:39                          */
+/* Created on:     03.02.2015 20:01:11                          */
 /*==============================================================*/
 /* vor ersten Ausführung in MySQL:  create database bank;*/
-
-drop table if exists ACCOUNT;
 
 drop table if exists BANK;
 
@@ -25,28 +23,13 @@ drop table if exists STOCKS_PORTFOLIO;
 drop table if exists TRANSACTION;
 
 /*==============================================================*/
-/* Table: ACCOUNT                                               */
-/*==============================================================*/
-create table ACCOUNT
-(
-   ACCOUNT_DESCRIPTION  varchar(128) not null,
-   ACCOUNT_ID           int not null,
-   CUSTOMER_ID          int not null,
-   ACCOUNT_IBAN         varchar(34) not null,
-   ACCOUNT_SALDO        decimal(15,2) not null,
-   ACCOUNT_STATEMENT    decimal(15,2),
-   ACCOUNT_STATEMENT_DATE timestamp,
-   primary key (ACCOUNT_ID)
-);
-
-/*==============================================================*/
 /* Table: BANK                                                  */
 /*==============================================================*/
 create table BANK
 (
    BANK_BIC             varchar(11) not null,
    BANK_ADDRESS         varchar(128) not null,
-   BANK_ID              int not null AUTO_INCREMENT,
+   BANK_ID              int not null auto_increment,
    BANK_NAME            varchar(50) not null,
    primary key (BANK_ID)
 );
@@ -56,8 +39,14 @@ create table BANK
 /*==============================================================*/
 create table CHECKING_ACCOUNT
 (
-   ACCOUNT_ID           int not null,
+   ACCOUNT_ID           int not null auto_increment,
+   CUSTOMER_ID          int not null,
    CUS_ACCOUNT_ID       int,
+   ACCOUNT_DESCRIPTION  varchar(128) not null,
+   ACCOUNT_IBAN         varchar(34) not null,
+   ACCOUNT_SALDO        decimal(15,2) not null,
+   ACCOUNT_STATEMENT    decimal(15,2),
+   ACCOUNT_STATEMENT_DATE timestamp,
    primary key (ACCOUNT_ID)
 );
 
@@ -66,7 +55,7 @@ create table CHECKING_ACCOUNT
 /*==============================================================*/
 create table CONTRA_ACCOUNT
 (
-   TRANSACTIONS_ID      int not null,
+   TRANSACTIONS_ID      int not null auto_increment,
    CONTRA_IBAN          varchar(34) not null,
    CONTRA_BIC           varchar(11) not null,
    primary key (TRANSACTIONS_ID)
@@ -77,8 +66,14 @@ create table CONTRA_ACCOUNT
 /*==============================================================*/
 create table CUSTODY_ACCOUNT
 (
-   ACCOUNT_ID           int not null,
+   ACCOUNT_ID           int not null auto_increment,
+   CUSTOMER_ID          int not null,
    CHE_ACCOUNT_ID       int not null,
+   ACCOUNT_DESCRIPTION  varchar(128) not null,
+   ACCOUNT_IBAN         varchar(34) not null,
+   ACCOUNT_SALDO        decimal(15,2) not null,
+   ACCOUNT_STATEMENT    decimal(15,2),
+   ACCOUNT_STATEMENT_DATE timestamp,
    primary key (ACCOUNT_ID)
 );
 
@@ -101,7 +96,7 @@ create table CUSTOMER
 (
    CUSTOMER_ADDRESS     varchar(128) not null,
    CUSTOMER_NAME        varchar(128) not null,
-   CUSTOMER_ID          int not null AUTO_INCREMENT,
+   CUSTOMER_ID          int not null auto_increment,
    BANK_ID              int not null,
    PIN                  varchar(128) not null,
    primary key (CUSTOMER_ID)
@@ -112,8 +107,14 @@ create table CUSTOMER
 /*==============================================================*/
 create table SAVINGS_ACCOUNT
 (
-   ACCOUNT_ID           int not null,
+   ACCOUNT_ID           int not null auto_increment,
+   CUSTOMER_ID          int not null,
    CHE_ACCOUNT_ID       int not null,
+   ACCOUNT_DESCRIPTION  varchar(128) not null,
+   ACCOUNT_IBAN         varchar(34) not null,
+   ACCOUNT_SALDO        decimal(15,2) not null,
+   ACCOUNT_STATEMENT    decimal(15,2),
+   ACCOUNT_STATEMENT_DATE timestamp,
    primary key (ACCOUNT_ID)
 );
 
@@ -138,33 +139,38 @@ create table TRANSACTION
    VALUTA_DATE          date not null,
    TRANSACTION_TYPE     int not null,
    TIMESTAMP            timestamp not null,
-   TRANSACTIONS_ID      int not null,
+   TRANSACTIONS_ID      int not null auto_increment,
    ACCOUNT_ID           int not null,
+   ACC_ACCOUNT_ID       int not null,
+   ACC_ACCOUNT_ID2      int not null,
    CON_TRANSACTIONS_ID  int,
    CUS_TRANSACTIONS_ID  int,
    primary key (TRANSACTIONS_ID)
 );
 
-alter table ACCOUNT add constraint FK_CUSTOMER_TO_ACCOUNT foreign key (CUSTOMER_ID)
-      references CUSTOMER (CUSTOMER_ID) on delete restrict on update restrict;
-
-alter table CHECKING_ACCOUNT add constraint FK_ACCOUNT_TYPE foreign key (ACCOUNT_ID)
-      references ACCOUNT (ACCOUNT_ID) on delete restrict on update restrict;
-
 alter table CHECKING_ACCOUNT add constraint FK_CUSTODY_TO_CHECKINGACCOUNT2 foreign key (CUS_ACCOUNT_ID)
       references CUSTODY_ACCOUNT (ACCOUNT_ID) on delete restrict on update restrict;
 
-alter table CUSTODY_ACCOUNT add constraint FK_ACCOUNT_TYPE2 foreign key (ACCOUNT_ID)
-      references ACCOUNT (ACCOUNT_ID) on delete restrict on update restrict;
+alter table CHECKING_ACCOUNT add constraint FK_CUSTOMER_TO_ACCOUNT2 foreign key (CUSTOMER_ID)
+      references CUSTOMER (CUSTOMER_ID) on delete restrict on update restrict;
+
+alter table CONTRA_ACCOUNT add constraint FK_TRANSACTION_TO_CONTRATRANSACTION2 foreign key (TRANSACTIONS_ID)
+      references TRANSACTION (TRANSACTIONS_ID) on delete restrict on update restrict;
 
 alter table CUSTODY_ACCOUNT add constraint FK_CUSTODY_TO_CHECKINGACCOUNT foreign key (CHE_ACCOUNT_ID)
       references CHECKING_ACCOUNT (ACCOUNT_ID) on delete restrict on update restrict;
 
+alter table CUSTODY_ACCOUNT add constraint FK_CUSTOMER_TO_ACCOUNT3 foreign key (CUSTOMER_ID)
+      references CUSTOMER (CUSTOMER_ID) on delete restrict on update restrict;
+
+alter table CUSTODY_TRANSACTION add constraint FK_TRANSACTION_TO_CUSTODYTRANSACTION2 foreign key (TRANSACTIONS_ID)
+      references TRANSACTION (TRANSACTIONS_ID) on delete restrict on update restrict;
+
 alter table CUSTOMER add constraint FK_BANK_TO_CUSTOMER foreign key (BANK_ID)
       references BANK (BANK_ID) on delete restrict on update restrict;
 
-alter table SAVINGS_ACCOUNT add constraint FK_ACCOUNT_TYPE3 foreign key (ACCOUNT_ID)
-      references ACCOUNT (ACCOUNT_ID) on delete restrict on update restrict;
+alter table SAVINGS_ACCOUNT add constraint FK_CUSTOMER_TO_ACCOUNT foreign key (CUSTOMER_ID)
+      references CUSTOMER (CUSTOMER_ID) on delete restrict on update restrict;
 
 alter table SAVINGS_ACCOUNT add constraint FK_SAVINGS_TO_CHECKINGACCOUNT foreign key (CHE_ACCOUNT_ID)
       references CHECKING_ACCOUNT (ACCOUNT_ID) on delete restrict on update restrict;
@@ -172,12 +178,18 @@ alter table SAVINGS_ACCOUNT add constraint FK_SAVINGS_TO_CHECKINGACCOUNT foreign
 alter table STOCKS_PORTFOLIO add constraint FK_PORTFOLIO_TO_CUSTODYACCOUNT foreign key (ACCOUNT_ID)
       references CUSTODY_ACCOUNT (ACCOUNT_ID) on delete restrict on update restrict;
 
-alter table TRANSACTION add constraint FK_ACCOUNT_TO_TRANSACTION foreign key (ACCOUNT_ID)
-      references ACCOUNT (ACCOUNT_ID) on delete restrict on update restrict;
+alter table TRANSACTION add constraint FK_ACCOUNT_TO_TRANSACTION foreign key (ACC_ACCOUNT_ID2)
+      references SAVINGS_ACCOUNT (ACCOUNT_ID) on delete restrict on update restrict;
 
-alter table TRANSACTION add constraint FK_TRANSACTION_TO_CONTRATRANSACTION foreign key (TRANSACTIONS_ID)
+alter table TRANSACTION add constraint FK_ACCOUNT_TO_TRANSACTION2 foreign key (ACCOUNT_ID)
+      references CHECKING_ACCOUNT (ACCOUNT_ID) on delete restrict on update restrict;
+
+alter table TRANSACTION add constraint FK_ACCOUNT_TO_TRANSACTION3 foreign key (ACC_ACCOUNT_ID)
+      references CUSTODY_ACCOUNT (ACCOUNT_ID) on delete restrict on update restrict;
+
+alter table TRANSACTION add constraint FK_TRANSACTION_TO_CONTRATRANSACTION foreign key (CON_TRANSACTIONS_ID)
       references CONTRA_ACCOUNT (TRANSACTIONS_ID) on delete restrict on update restrict;
 
-alter table TRANSACTION add constraint FK_TRANSACTION_TO_CUSTODYTRANSACTION foreign key (TRANSACTIONS_ID)
+alter table TRANSACTION add constraint FK_TRANSACTION_TO_CUSTODYTRANSACTION foreign key (CUS_TRANSACTIONS_ID)
       references CUSTODY_TRANSACTION (TRANSACTIONS_ID) on delete restrict on update restrict;
 
