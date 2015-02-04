@@ -8,6 +8,7 @@ import java.sql.Timestamp;
  * Created by Joey on 24.01.2015.
  */
 @Entity
+@Inheritance(strategy = InheritanceType.JOINED)
 @Table(name = "account", schema = "", catalog = "bank")
 public class AccountEntity {
     private String accountDescription;
@@ -15,8 +16,8 @@ public class AccountEntity {
     private int customerId;
     private String accountIban;
     private BigDecimal accountSaldo;
-    private BigDecimal accountStatement;
-    private Timestamp accountStatementDate;
+    private BigDecimal accountStatement;//Summe == AccountSaldo zu Beginn
+    private Timestamp accountStatementDate;//Datum vom letzten Kontoauszug
 
     @Basic
     @Column(name = "ACCOUNT_DESCRIPTION", nullable = false, insertable = true, updatable = true, length = 128)
@@ -29,6 +30,7 @@ public class AccountEntity {
     }
 
     @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name = "ACCOUNT_ID", nullable = false, insertable = true, updatable = true)
     public int getAccountId() {
         return accountId;

@@ -7,11 +7,11 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "custody_account", schema = "", catalog = "bank")
-public class CustodyAccountEntity {
+public class CustodyAccountEntity extends AccountEntity{
     private int accountId;
     private int cheAccountId;
 
-    @Id
+    /*@Id
     @Column(name = "ACCOUNT_ID", nullable = false, insertable = true, updatable = true)
     public int getAccountId() {
         return accountId;
@@ -19,7 +19,7 @@ public class CustodyAccountEntity {
 
     public void setAccountId(int accountId) {
         this.accountId = accountId;
-    }
+    }*/
 
     @Basic
     @Column(name = "CHE_ACCOUNT_ID", nullable = false, insertable = true, updatable = true)

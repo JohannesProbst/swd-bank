@@ -30,7 +30,7 @@ drop table if exists TRANSACTION;
 create table ACCOUNT
 (
    ACCOUNT_DESCRIPTION  varchar(128) not null,
-   ACCOUNT_ID           int not null,
+   ACCOUNT_ID           int not null AUTO_INCREMENT,
    CUSTOMER_ID          int not null,
    ACCOUNT_IBAN         varchar(34) not null,
    ACCOUNT_SALDO        decimal(15,2) not null,
@@ -138,7 +138,7 @@ create table TRANSACTION
    VALUTA_DATE          date not null,
    TRANSACTION_TYPE     int not null,
    TIMESTAMP            timestamp not null,
-   TRANSACTIONS_ID      int not null,
+   TRANSACTIONS_ID      int not null AUTO_INCREMENT,
    ACCOUNT_ID           int not null,
    CON_TRANSACTIONS_ID  int,
    CUS_TRANSACTIONS_ID  int,

@@ -31,6 +31,7 @@
       <td>
         <a href="${pageContext.request.contextPath}/customer/edit/${customer.customerId}">bearbeiten</a><br/>
         <a href="${pageContext.request.contextPath}/customer/delete/${customer.customerId}">löschen</a><br/>
+        <a href="${pageContext.request.contextPath}/customer/${customer.customerId}/account/open/checking">Konto anlegen</a><br/>
       </td>
     </tr>
   </c:forEach>

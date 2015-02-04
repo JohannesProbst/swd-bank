@@ -7,19 +7,19 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "checking_account", schema = "", catalog = "bank")
-public class CheckingAccountEntity {
+public class CheckingAccountEntity extends AccountEntity {
     private int accountId;
     private Integer cusAccountId;
 
-    @Id
+    /*@Id
     @Column(name = "ACCOUNT_ID", nullable = false, insertable = true, updatable = true)
     public int getAccountId() {
         return accountId;
-    }
+    }*/
 
-    public void setAccountId(int accountId) {
+   /* public void setAccountId(int accountId) {
         this.accountId = accountId;
-    }
+    }*/
 
     @Basic
     @Column(name = "CUS_ACCOUNT_ID", nullable = true, insertable = true, updatable = true)
