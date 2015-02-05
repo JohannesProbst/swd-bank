@@ -2,18 +2,18 @@
 <%--
   Created by IntelliJ IDEA.
   User: Joey
-  Date: 04.02.2015
-  Time: 18:05
+  Date: 05.02.2015
+  Time: 02:11
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Account Open-Page</title>
+    <title>Account Edit-Page</title>
 </head>
 <body>
 <h1>Ein Girokonto anlegen</h1>
-<form:form method="post" commandName="account" action="${pageContext.request.contextPath}/open/checking" >
+<form:form method="post" commandName="account" action="${pageContext.request.contextPath}/account/edit/${account.accountId}" >
   <table>
     <tbody>
     <tr>
@@ -31,6 +31,14 @@
     <tr>
       <td>Saldo:</td>
       <td><form:input path="accountSaldo" /></td>
+    </tr>
+    <tr>
+      <td>Stand letzter Kontoauszug:</td>
+      <td><form:input path="accountStatement" /></td>
+    </tr>
+    <tr>
+      <td>Datum letzter Kontoauszug:</td>
+      <td><form:input path="accountStatementDate" /></td>
     </tr>
     <tr>
       <td><input type="submit" value="open account" /></td>
