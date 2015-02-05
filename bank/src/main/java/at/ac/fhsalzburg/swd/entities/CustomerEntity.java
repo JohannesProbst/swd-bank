@@ -10,9 +10,24 @@ import javax.persistence.*;
 public class CustomerEntity {
     private String customerAddress;
     private String customerName;
+
     private int customerId;
     private int bankId;
     private String pin;
+
+//    private Set<CheckingAccountEntity> checkingAccounts;
+//
+//    @OneToMany(fetch = FetchType.EAGER, targetEntity = CheckingAccountEntity.class, mappedBy = "customer")
+//    public Set<CheckingAccountEntity> getCheckingAccounts() {
+//        return checkingAccounts;
+//    }
+//
+//    public void addCheckingAccount(CheckingAccountEntity checkingAccountEntity)
+//    {
+//        if( ! checkingAccounts.contains(checkingAccountEntity)) {
+//            checkingAccounts.add(checkingAccountEntity);
+//        }
+//    }
 
     @Basic
     @Column(name = "CUSTOMER_ADDRESS", nullable = false, insertable = true, updatable = true, length = 128)

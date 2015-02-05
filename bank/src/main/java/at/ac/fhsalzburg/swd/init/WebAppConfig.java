@@ -12,6 +12,8 @@ import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.JstlView;
 import org.springframework.web.servlet.view.UrlBasedViewResolver;
 
@@ -28,7 +30,7 @@ import java.util.Properties;
 @ComponentScan("at.ac.fhsalzburg.swd")
 @PropertySource("classpath:db.properties")
 @EnableJpaRepositories("at.ac.fhsalzburg.swd")
-public class WebAppConfig {
+public class WebAppConfig extends WebMvcConfigurerAdapter {
     @Resource
     private Environment environment;
 
@@ -80,5 +82,17 @@ public class WebAppConfig {
         resolver.setSuffix(".jsp");
         resolver.setViewClass(JstlView.class);
         return resolver;
+    }
+
+    /**
+     * add static resources
+     *
+     * @param   registry
+     * @return  void
+     */
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry)
+    {
+        registry.addResourceHandler("/assets/**").addResourceLocations("assets/");
     }
 }

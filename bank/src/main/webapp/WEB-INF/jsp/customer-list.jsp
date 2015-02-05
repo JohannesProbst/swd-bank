@@ -10,9 +10,19 @@
 <html>
 <head>
     <title>Customer List-Page</title>
+    <link href="<c:url value='/'/>assets/css/main.css" rel="stylesheet" media="screen" />
+
 </head>
 <body>
 <h1>Liste aller Kunden</h1>
+
+<c:if test="${not empty error}">
+    <p class="message error">${error}<p>
+</c:if>
+<c:if test="${not empty message}">
+    <p class="message success">${message}<p>
+</c:if>
+
 <table style="text-align: center;" border="1px" cellpadding="0" cellspacing="0" >
   <thead>
   <tr>
@@ -33,6 +43,7 @@
         <a href="${pageContext.request.contextPath}/customer/delete/${customer.customerId}">löschen</a><br/>
         <a href="${pageContext.request.contextPath}/customer/${customer.customerId}/account/list/">aktuelle Konten</a><br/>
         <a href="${pageContext.request.contextPath}/customer/${customer.customerId}/account/open/checking">Konto anlegen</a><br/>
+        <a href="${pageContext.request.contextPath}/customer/${customer.customerId}/account/open/savings">Sparkonto anlegen</a><br/>
       </td>
     </tr>
   </c:forEach>
