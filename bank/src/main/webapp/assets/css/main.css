@@ -1,0 +1,17 @@
+.message {
+    padding: 10px;
+    font-size: 16px;
+    display: inline-block;
+}
+.message.error {
+    color: red;
+    border: 2px solid red;
+}
+.message.success {
+    color: green;
+    border: 2px solid green;
+}
+.message.warning {
+    color: yellow;
+    border: 2px solid yellow;
+}
