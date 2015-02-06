@@ -42,8 +42,9 @@
         <a href="${pageContext.request.contextPath}/customer/edit/${customer.customerId}">bearbeiten</a><br/>
         <a href="${pageContext.request.contextPath}/customer/delete/${customer.customerId}">löschen</a><br/>
         <a href="${pageContext.request.contextPath}/customer/${customer.customerId}/account/list/">aktuelle Konten</a><br/>
-        <a href="${pageContext.request.contextPath}/customer/${customer.customerId}/account/open/checking">Konto anlegen</a><br/>
+        <a href="${pageContext.request.contextPath}/customer/${customer.customerId}/account/open/checking">Girokonto anlegen</a><br/>
         <a href="${pageContext.request.contextPath}/customer/${customer.customerId}/account/open/savings">Sparkonto anlegen</a><br/>
+        <a href="${pageContext.request.contextPath}/customer/${customer.customerId}/account/open/custody">WP-Depot anlegen</a><br/>
       </td>
     </tr>
   </c:forEach>

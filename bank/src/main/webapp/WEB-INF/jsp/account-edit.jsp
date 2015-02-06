@@ -12,7 +12,7 @@
     <title>Account Edit-Page</title>
 </head>
 <body>
-<h1>Ein Girokonto anlegen</h1>
+<h1>Ein Konto &auml;ndern</h1>
 <form:form method="post" commandName="account" action="${pageContext.request.contextPath}/account/edit/${account.accountId}" >
   <table>
     <tbody>
@@ -22,7 +22,7 @@
     </tr>
     <tr>
       <td>Kunden Id:</td>
-      <td><form:input path="customerId" /></td>
+      <td><form:input path="customerId" readonly="true" /></td>
     </tr>
     <tr>
       <td>IBAN:</td>
@@ -41,7 +41,7 @@
       <td><form:input path="accountStatementDate" /></td>
     </tr>
     <tr>
-      <td><input type="submit" value="open account" /></td>
+      <td><input type="submit" value="update account" /></td>
     </tr>
     </tbody>
   </table>

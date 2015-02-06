@@ -3,16 +3,16 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>Account Open-Page</title>
+    <title>CustodyAccount Open-Page</title>
 </head>
 <body>
-<h1>Ein neues Sparkonto anlegen</h1>
+<h1>Ein neues WertpapierDepot anlegen</h1>
 
-<form:form method="post" commandName="savings" action="${pageContext.request.contextPath}/open/savings" >
+<form:form method="post" commandName="custody" action="${pageContext.request.contextPath}/open/custody" >
     <table>
         <tbody>
         <tr>
-            <td>Girokonto:</td>
+            <td>Wertpapier Depot:</td>
             <td><form:select path="cheAccountId" items="${checkingAccounts}"></form:select></td>
         </tr>
         <tr>
@@ -21,7 +21,7 @@
         </tr>
         <tr>
             <td>Kunden Id:</td>
-            <td><form:input path="customerId" readonly="true"/></td>
+            <td><form:input path="customerId" readonly="true" /></td>
         </tr>
         <tr>
             <td>IBAN:</td>

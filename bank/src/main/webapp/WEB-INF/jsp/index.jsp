@@ -29,9 +29,6 @@
   <br>
   <a href="${pageContext.request.contextPath}/customer/create">Einen neuen Kunden anlegen</a><br/>
   <a href="${pageContext.request.contextPath}/customer/list">Alle Kunden anzeigen</a><br/>
-  <br>
-  <a href="${pageContext.request.contextPath}/custodyaccount/create">Ein Wertpapier Depot Konto anlegen</a><br/>
-  <a href="${pageContext.request.contextPath}/custodyaccount/list">Alle Wertpapier Depots anzeigen</a><br/>
 </p>
 
 <p>

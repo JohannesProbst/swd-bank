@@ -1,9 +1,6 @@
 package at.ac.fhsalzburg.swd.controller;
 
-import at.ac.fhsalzburg.swd.entities.AccountEntity;
-import at.ac.fhsalzburg.swd.entities.CheckingAccountEntity;
-import at.ac.fhsalzburg.swd.entities.SavingsAccountEntity;
-import at.ac.fhsalzburg.swd.entities.CustomerEntity;
+import at.ac.fhsalzburg.swd.entities.*;
 import at.ac.fhsalzburg.swd.repositories.AccountRepository;
 import at.ac.fhsalzburg.swd.repositories.CheckingAccountRepository;
 import at.ac.fhsalzburg.swd.repositories.CustomerRepository;
@@ -11,7 +8,6 @@ import org.apache.commons.validator.routines.checkdigit.CheckDigitException;
 import org.apache.commons.validator.routines.checkdigit.IBANCheckDigit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,12 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.sql.Timestamp;
-import java.util.Date;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Random;
-import java.util.Map;
-import java.util.HashMap;
+import java.util.*;
 
 /**
  * Created by Joey on 04.02.2015.
@@ -94,6 +85,56 @@ public class AccountController {
         accountRepository.save(account);
 
         redirectAttributes.addFlashAttribute("message", "New savings account successfully created");
+        return mav;
+    }
+
+
+    @RequestMapping(value = "customer/{id}/account/open/custody", method = RequestMethod.GET)
+    public ModelAndView newCustodyAccount(@PathVariable Integer id, final RedirectAttributes redirectAttributes)
+    {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("redirect:/customer/list");
+
+        CustomerEntity customer = customerRepository.findOne(id);
+        if(customer != null)
+        {
+            List<CheckingAccountEntity> checkingAccounts = checkingAccountRepository.findAllByCustomerId(customer.getCustomerId());
+            if(checkingAccounts != null && ! checkingAccounts.isEmpty())
+            {
+                CustodyAccountEntity custodyAccount = new CustodyAccountEntity();
+                custodyAccount.setCustomerId(id);
+
+                Map<Integer, String> cAccounts = new HashMap<>();
+                for(int i = 0; i < checkingAccounts.size(); i++) {
+                    cAccounts.put(checkingAccounts.get(i).getAccountId(), checkingAccounts.get(i).getAccountDescription());
+                }
+
+                mav = new ModelAndView("custody-open", "custody", custodyAccount);
+                mav.addObject("checkingAccounts", cAccounts);
+
+                return mav;
+            }
+            else {
+                redirectAttributes.addFlashAttribute("error", "Error: Customer doesn't have a checking account!");
+                return mav;
+            }
+        }
+
+        redirectAttributes.addFlashAttribute("error", "Error: Customer with ID "+id+" not found!");
+        return mav;
+    }
+
+    @RequestMapping(value = "/open/custody", method=RequestMethod.POST)
+    public ModelAndView createNewCustodyAccount(@ModelAttribute CustodyAccountEntity account, final RedirectAttributes redirectAttributes)
+    {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("redirect:/customer/list");
+
+        account.setAccountStatement(account.getAccountSaldo());
+        account.setAccountStatementDate(new Timestamp(new Date().getTime()));
+        accountRepository.save(account);
+
+        redirectAttributes.addFlashAttribute("message", "New custody account successfully created");
         return mav;
     }
 

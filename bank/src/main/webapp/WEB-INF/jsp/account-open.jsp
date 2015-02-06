@@ -22,7 +22,7 @@
     </tr>
     <tr>
       <td>Kunden Id:</td>
-      <td><form:input path="customerId" /></td>
+      <td><form:input path="customerId" readonly="true" /></td>
     </tr>
     <tr>
       <td>IBAN:</td>
