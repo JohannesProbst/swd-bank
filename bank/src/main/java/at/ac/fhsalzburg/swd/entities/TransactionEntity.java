@@ -1,5 +1,7 @@
 package at.ac.fhsalzburg.swd.entities;
 
+import com.sun.org.apache.xpath.internal.operations.Bool;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Date;
@@ -19,6 +21,24 @@ public class TransactionEntity {
     private int accountId;
     private Integer conTransactionsId;
     private Integer cusTransactionsId;
+
+
+    private CustomerEntity customer;
+    private AccountEntity account;
+    private AccountEntity targetAccount;
+
+    public enum TransactionType {
+        DEPOSIT(0), WITHDRAW(1), TRANSFER(2), BUY(3), SELL(4);
+        private final Integer id;
+        private TransactionType(Integer id) {
+            this.id = id;
+        }
+        public Integer toInteger() {
+            return id;
+        }
+    }
+
+    private Boolean valid = false;
 
     @Basic
     @Column(name = "TRANSACTION_AMOUNT", nullable = false, insertable = true, updatable = true, precision = 2)
@@ -46,8 +66,8 @@ public class TransactionEntity {
         return transactionType;
     }
 
-    public void setTransactionType(int transactionType) {
-        this.transactionType = transactionType;
+    public void setTransactionType(TransactionType transactionType) {
+        this.transactionType = transactionType.toInteger();
     }
 
     @Basic
@@ -62,6 +82,7 @@ public class TransactionEntity {
 
     @Id
     @Column(name = "TRANSACTIONS_ID", nullable = false, insertable = true, updatable = true)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public int getTransactionsId() {
         return transactionsId;
     }
@@ -98,6 +119,39 @@ public class TransactionEntity {
 
     public void setCusTransactionsId(Integer cusTransactionsId) {
         this.cusTransactionsId = cusTransactionsId;
+    }
+
+    @Transient
+    public Boolean isValid() {
+        return valid;
+    }
+    @Transient
+    public void setValid(Boolean valid) {
+        this.valid = valid;
+    }
+    @Transient
+    public AccountEntity getTargetAccount() {
+        return targetAccount;
+    }
+    @Transient
+    public void setTargetAccount(AccountEntity targetAccount) {
+        this.targetAccount = targetAccount;
+    }
+    @Transient
+    public AccountEntity getAccount() {
+        return account;
+    }
+    @Transient
+    public void setAccount(AccountEntity account) {
+        this.account = account;
+    }
+    @Transient
+    public CustomerEntity getCustomer() {
+        return customer;
+    }
+    @Transient
+    public void setCustomer(CustomerEntity customer) {
+        this.customer = customer;
     }
 
     @Override

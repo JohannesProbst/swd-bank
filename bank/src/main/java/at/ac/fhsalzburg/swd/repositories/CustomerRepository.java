@@ -7,4 +7,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * Created by Joey on 26.01.2015.
  */
 public interface CustomerRepository extends JpaRepository<CustomerEntity, Integer> {
+
+    CustomerEntity findByCustomerIdAndPin(Integer customerId, String pin);
 }

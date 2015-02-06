@@ -15,3 +15,45 @@
     color: yellow;
     border: 2px solid yellow;
 }
+.transaction-table,
+.account-table {
+    min-width: 400px;
+}
+.transaction-table td,
+.account-table td {
+    padding: 10px;
+}
+.transaction-table td {
+    text-align: center;
+    border: 1px solid #999;
+}
+.transaction-table select option.checking {
+    background-color: #d8e1ff;
+}
+.transaction-table select option.savings {
+    background-color: #ffcbf2;
+}
+.transaction-table select option.custody {
+    background-color: #baffc3;
+}
+.account-table td:last-child {
+    width: 100px;
+}
+.account-table.checking td {
+     border: 1px solid #008fff;
+ }
+.account-table.checking td.highlight {
+    background: #d8e1ff;
+}
+.account-table.savings td {
+    border: 1px solid #ff00bd;
+}
+.account-table.savings td.highlight {
+    background: #ffcbf2;
+}
+.account-table.custody td {
+    border: 1px solid #00ff5f;
+}
+.account-table.custody td.highlight {
+    background: #baffc3;
+}

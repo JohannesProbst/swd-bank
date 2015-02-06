@@ -14,6 +14,7 @@ public class ContraAccountEntity {
 
     @Id
     @Column(name = "TRANSACTIONS_ID", nullable = false, insertable = true, updatable = true)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     public int getTransactionsId() {
         return transactionsId;
     }
