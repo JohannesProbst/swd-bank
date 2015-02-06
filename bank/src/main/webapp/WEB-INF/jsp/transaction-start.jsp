@@ -176,6 +176,54 @@
     </table>
 </form>
 
+
+<form method="post" action="${pageContext.request.contextPath}/transaction/transfer" >
+
+    <h2>Geld überweisen:</h2>
+    <input type="hidden" name="customerId" value="${customer.getCustomerId()}" />
+    <input type="hidden" name="pin" value="${customer.getPin()}" />
+
+    <table class="transaction-table">
+        <thead>
+        <tr>
+            <th>Betrag</th>
+            <th>Konto</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><input type="text" name="amount" /></td>
+                <td>
+                    <select name="accountId">
+                        <c:forEach var="account" items="${checkingAccounts}">
+                            <option class="checking" value="${account.getAccountId()}">${account.getAccountId()}: ${account.getAccountDescription()}</option>
+                        </c:forEach>
+                        <c:forEach var="account" items="${savingsAccounts}">
+                            <option class="savings" value="${account.getAccountId()}">${account.getAccountId()}: ${account.getAccountDescription()}</option>
+                        </c:forEach>
+                        <c:forEach var="account" items="${custodyAccounts}">
+                            <option class="custody" value="${account.getAccountId()}">${account.getAccountId()}: ${account.getAccountDescription()}</option>
+                        </c:forEach>
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>BIC</th>
+                <th>IBAN</th>
+            </tr>
+            <tr>
+                <td><input name="bic" type="text" value="" />
+                <td><input name="iban" type="text" value="" /></td>
+            </tr>
+            <tr><td colspan="2"><input type="submit" value="Durchführen" /></td></tr>
+        </tbody>
+    </table>
+
+
+
+
+</form>
+
 <p>
     <a href="${pageContext.request.contextPath}/">Startseite</a>
 </p>

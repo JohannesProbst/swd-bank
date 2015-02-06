@@ -151,7 +151,56 @@ public class TransactionController
         return mav;
     }
 
-    public TransactionEntity createTransaction(Integer customerId, String pin, Integer accountId, BigDecimal amount, TransactionEntity.TransactionType tt)
+    @RequestMapping(value = "/transaction/transfer", method = RequestMethod.POST)
+    public ModelAndView depositTransaction(
+            @RequestParam("customerId") Integer customerId,
+            @RequestParam("pin") String pin,
+            @RequestParam("amount") BigDecimal amount,
+            @RequestParam("accountId") Integer accountId,
+            @RequestParam("bic") String bic,
+            @RequestParam("iban") String iban,
+            final RedirectAttributes redirectAttributes)
+    {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("redirect:/transaction/start");
+
+        TransactionEntity transaction = createTransaction(customerId, pin, accountId, amount, TransactionEntity.TransactionType.TRANSFER, bic, iban);
+
+        return mav;
+    }
+
+    public TransactionEntity createTransaction(
+            Integer customerId,
+            String pin,
+            Integer accountId,
+            BigDecimal amount,
+            TransactionEntity.TransactionType tt,
+            String bic,
+            String iban)
+    {
+        TransactionEntity transaction = createTransaction(customerId, pin, accountId, amount, tt);
+        if(transaction.isValid())
+        {
+            transaction.setValid(false);
+            AccountEntity account = accountRepository.findOneByAccountIban(iban);
+            if(account != null)
+            {
+
+
+            }
+            return transaction;
+        }
+        else {
+            return transaction;
+        }
+    }
+
+    public TransactionEntity createTransaction(
+            Integer customerId,
+            String pin,
+            Integer accountId,
+            BigDecimal amount,
+            TransactionEntity.TransactionType tt)
     {
         TransactionEntity transaction = new TransactionEntity();
         ContraAccountEntity contraAccountEntity = new ContraAccountEntity();

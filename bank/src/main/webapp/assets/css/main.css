@@ -1,3 +1,9 @@
+select,
+input:not([type="submit"]) {
+    border: 1px solid #cccccc;
+    padding: 4px;
+}
+
 .message {
     padding: 10px;
     font-size: 16px;
@@ -17,7 +23,7 @@
 }
 .transaction-table,
 .account-table {
-    min-width: 400px;
+    min-width: 440px;
 }
 .transaction-table td,
 .account-table td {
@@ -27,6 +33,11 @@
     text-align: center;
     border: 1px solid #999;
 }
+
+.transaction-table tbody tr th {
+    background: #b3d4ff;
+}
+
 .transaction-table select option.checking {
     background-color: #d8e1ff;
 }
@@ -57,3 +68,4 @@
 .account-table.custody td.highlight {
     background: #baffc3;
 }
+
